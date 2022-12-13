@@ -1,3 +1,4 @@
+import { Link } from "react-router-dom";
 import { CartWidget } from "../CartWidget/CartWidget";
 import "./navbar.css";
 
@@ -10,19 +11,19 @@ export const Navbar = () => {
 			{/* Secciones de la navbar */}
 			<ul className='navbar--ul'>
 				<li className='navbar--ul--li'>
-					<a className='navbar--ul--li--a' href='#section1'>
-						Section 1
-					</a>
+					<Link to='/category/keyboard' className='navbar--ul--li--a'>
+						Keyboards
+					</Link>
 				</li>
 				<li className='navbar--ul--li'>
-					<a className='navbar--ul--li--a' href='#section2'>
-						Section 2
-					</a>
+					<Link to='/category/mouse' className='navbar--ul--li--a'>
+						Mouses
+					</Link>
 				</li>
 				<li className='navbar--ul--li'>
-					<a className='navbar--ul--li--a' href='#section3'>
-						Section 3
-					</a>
+					<Link to='/category/pad' className='navbar--ul--li--a'>
+						Pads
+					</Link>
 				</li>
 			</ul>
 
