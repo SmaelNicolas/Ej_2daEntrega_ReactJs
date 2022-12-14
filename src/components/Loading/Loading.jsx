@@ -1,5 +1,5 @@
 import "./loading.css";
 
 export const Loading = () => {
-	return <div>Loading</div>;
+	return <div className='lds-hourglass'></div>;
 };
