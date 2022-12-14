@@ -6,7 +6,9 @@ export const Navbar = () => {
 	return (
 		<nav className='container--navbar'>
 			{/* LOGO */}
-			<div className='navbar--logo'>🪐</div>
+			<Link to='/' className='navbar--logo'>
+				🪐
+			</Link>
 
 			{/* Secciones de la navbar */}
 			<ul className='navbar--ul'>

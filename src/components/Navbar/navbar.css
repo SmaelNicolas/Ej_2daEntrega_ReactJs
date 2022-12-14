@@ -9,6 +9,7 @@
 }
 .navbar--logo {
 	font-size: 80px;
+	text-decoration: none;
 }
 .navbar--ul {
 	display: flex;
