@@ -14,7 +14,7 @@ export const ItemListContainer = () => {
 	const { idCategory } = useParams();
 
 	//UN ESTADO PARA SIMULAR UNA TARDANZA EN LA CARGA DE DATOS Y MOSTRAR UN COMPONENTE DE CARGA
-	// INICIALIZADO EN TRUE PORQUE NO QUEREMOS QUE AL MOMENTO DE MONTARSE ESTE COMPONENTE SE MUESTREN CAMPOS VACIOS
+	// INICIALIZADO EN TRUE PORQUE NO QUEREMOS QUE AL MOMENTO DE MONTARSE ESTE COMPONENTE SE MUESTREN CAMPOS VACIOS o INEXISTENTES
 	const [loading, setLoading] = useState(true);
 
 	//ESTADO QUE VOY A UTILIZAR PARA GUARDAR MIS PRODUCTOS, YA SEA SI ESTAN FILTRADOS O NO SEGUN EN LA URL QUE ME ENCUENTRE
@@ -34,16 +34,19 @@ export const ItemListContainer = () => {
 				setLoading(false);
 			}, 2000);
 		} else {
-			// AL EXISTIR CATEGORIA ES PORUQE ESTAMOS EN UNA URL category/idCategory
+			// AL EXISTIR CATEGORIA ES PORUQE ESTAMOS EN UNA URL category/:idCategory
 			// TRAER LOS PORDUCTOS YA FILTRADOS POR CATEGORIA
 			getItems(idCategory)
+				// GUARDO LA RESPUESTA EN EL ESTADO PARA ALMACENAR MIS PRODUCTOS
 				.then((response) => setMyProducts(response))
+				// DESPUES DE TODO SIMULO UN RETRASO DE 2S PARA YA MOSTRAR LOS PRODUCTOS FILTRADOS
 				.finally(
 					setTimeout(() => {
 						setLoading(false);
 					}, 2000)
 				);
 		}
+		// idCategory EN EL ARRAY DE DEPENDENCIA PARA GENERAR UN NUEVO CICLO DEL USEEFFECT AL CAMBIAR ENTRE CATEGORIAS
 	}, [idCategory]);
 
 	//ESTA FUNCION DEVUELVE UNA PROMESA CON LOS PRODUCTOS FILTRADOS
@@ -57,13 +60,14 @@ export const ItemListContainer = () => {
 	// MUESTRO EL COMPONENTE LOADING
 	// SI NO ESTA CARGANDO
 	// YA ME ASEGURO DE TENER LOS PRODUCTOS DISPONIBLES PARA PODER SER RENDERIZADOS
-
 	return loading ? (
 		<Loading />
 	) : (
 		<section className='container--ItemListContainer'>
 			{/* TITULO DINAMICO SEGUN LA URL DONDE ESTEMOS */}
-			<h2>{idCategory === undefined ? "home" : idCategory}</h2>
+			<h2 className='itemListContainer--title'>
+				{idCategory === undefined ? "home" : idCategory}
+			</h2>
 
 			<div className='container--cards'>
 				{/* RECORRO EL ESTADO DONDE GUARDO LOS PRODUCTOS LUEGO DE HABERLOS FILTRADOS O NO  */}
