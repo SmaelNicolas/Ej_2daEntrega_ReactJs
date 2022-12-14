@@ -5,12 +5,11 @@
 	align-items: center;
 	margin-top: 10px;
 }
-.container--ItemListContainer--text {
-	text-align: center;
-	margin: 5px 0px;
-}
-.itemListContainer--link {
-	padding: 0px 10px;
-	font-weight: 700;
-	color: blue;
+.container--cards {
+	max-width: 1500px;
+	display: flex;
+	flex-wrap: wrap;
+	flex-direction: row;
+	justify-content: center;
+	align-items: center;
 }
