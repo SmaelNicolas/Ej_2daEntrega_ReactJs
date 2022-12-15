@@ -7,7 +7,7 @@ import { Navbar } from "./components/Navbar/Navbar";
 function App() {
 	return (
 		<div className='container--app'>
-			IMPORTAR BROWSERROUTER DE react-router-dom( instalar con 👉 npm i
+			{/* IMPORTAR BROWSERROUTER DE react-router-dom( instalar con 👉 npm i */}
 			react-router-dom)
 			<BrowserRouter>
 				{/* TODOS LOS COMPONENTES FUERA DE LA ETIQUETA ROUTES SON LOS QUE VAN A PERSISTIR EN LA NAVEGABILIDAD  Ej: Navbar , footer , etc (los comunes a todas las paginas)*/}
