@@ -21,38 +21,37 @@ export const ItemListContainer = () => {
 	const [myProducts, setMyProducts] = useState();
 
 	useEffect(() => {
-		//PARA QUE CUANDO CAMBIE LA URL Y SE VUELVE A EJECUTAR EL USEEFFECT SE INICIALE EN TRUE
+		//PARA QUE CUANDO CAMBIE LA URL (cambia la categoria) Y SE VUELVE A EJECUTAR EL USEEFFECT SE INICIALE EN TRUE
 		setLoading(true);
 
-		if (idCategory === undefined) {
-			// AL NO EXISTIR CATEGORIA ( HOME = " / ") MOTRAR TODOS LOS PRODUCTOS
-			// AL ESTADO LE ASIGNO TODOS LOS PRODUCTOS
-			setMyProducts(products);
-
-			//SIMULO UN RETRASO Y PONGO EL ESTADO DE CARGA EN FALSO LUEGO DE 2 SEGS
-			setTimeout(() => {
-				setLoading(false);
-			}, 2000);
-		} else {
-			// AL EXISTIR CATEGORIA ES PORUQE ESTAMOS EN UNA URL category/:idCategory
-			// TRAER LOS PORDUCTOS YA FILTRADOS POR CATEGORIA
-			getItems(idCategory)
-				// GUARDO LA RESPUESTA EN EL ESTADO PARA ALMACENAR MIS PRODUCTOS
-				.then((response) => setMyProducts(response))
-				// DESPUES DE TODO SIMULO UN RETRASO DE 2S PARA YA MOSTRAR LOS PRODUCTOS FILTRADOS
-				.finally(
-					setTimeout(() => {
-						setLoading(false);
-					}, 2000)
-				);
-		}
+		// LLAMO A LA FUNCION QUE ME BUSCA LOS ITEMS CON LA CATEGORIA DE LA URL
+		getItems(idCategory)
+			// GUARDO LA RESPUESTA EN EL ESTADO PARA ALMACENAR MIS PRODUCTOS
+			.then((response) => setMyProducts(response))
+			// DESPUES DE RECIBIR Y GUARDAR EN MI ESTADO LOS PRODUCTOS FILTRADOS O NO, CAMBIO MI ESTADO DE CARGANDO A FALSO PARA PODER VER MIS CARDS
+			.finally(
+				//SIMULO UN RETRASO DE 2 SEGUNDOS
+				setTimeout(() => {
+					setLoading(false);
+				}, 2000)
+			);
 		// idCategory EN EL ARRAY DE DEPENDENCIA PARA GENERAR UN NUEVO CICLO DEL USEEFFECT AL CAMBIAR ENTRE CATEGORIAS
 	}, [idCategory]);
 
-	//ESTA FUNCION DEVUELVE UNA PROMESA CON LOS PRODUCTOS FILTRADOS
+	//ESTA FUNCION DEVUELVE UNA PROMESA CON LOS PRODUCTOS FILTRADOS O NO , SEGUN idCategory
 	const getItems = (valueToFilter) => {
+		// DEVUELVE LA RESPUESTA
 		return new Promise((resolve) => {
-			resolve(products.filter((item) => item.category === valueToFilter));
+			if (valueToFilter === undefined) {
+				// AL NO EXISTIR CATEGORIA ( HOME = " / ") DEVUELVO TODOS LOS PRODUCTOS
+				resolve(products);
+			} else {
+				// AL EXISTIR CATEGORIA ES PORUQE ESTAMOS EN UNA URL category/:idCategory
+				// TRAER LOS PORDUCTOS YA FILTRADOS POR CATEGORIA
+				resolve(
+					products.filter((item) => item.category === valueToFilter)
+				);
+			}
 		});
 	};
 
