@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import { products } from "../../data/items";
 import { Item } from "../Item/Item";
+import { ItemList } from "../ItemList/ItemList";
 import { Loading } from "../Loading/Loading";
 import "./itemListContainer.css";
 
@@ -62,17 +63,14 @@ export const ItemListContainer = () => {
 	return loading ? (
 		<Loading />
 	) : (
-		<section className='container--ItemListContainer'>
+		<section className="container--ItemListContainer">
 			{/* TITULO DINAMICO SEGUN LA URL DONDE ESTEMOS */}
-			<h2 className='itemListContainer--title'>
+			<h2 className="itemListContainer--title">
 				{idCategory === undefined ? "home" : idCategory}
 			</h2>
-
-			<div className='container--cards'>
-				{/* RECORRO EL ESTADO DONDE GUARDO LOS PRODUCTOS LUEGO DE HABERLOS FILTRADOS O NO  */}
-				{myProducts.map((product) => (
-					<Item key={product.id} item={product} />
-				))}
+			<div className="container--cards">
+				{/* LLAMO AL COMPONENTE QUE SE VA A ENCARGAR DE LA LOGICA DE RECORRER MIS PRODUCTOS */}
+				<ItemList myProducts={myProducts} />
 			</div>
 		</section>
 	);
